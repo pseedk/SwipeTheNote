@@ -1,12 +1,12 @@
 package ru.pvkovalev.swipethenote.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import ru.pvkovalev.swipethenote.screens.Add
-import ru.pvkovalev.swipethenote.screens.Edit
-import ru.pvkovalev.swipethenote.screens.Main
+import androidx.navigation.compose.rememberNavController
+import ru.pvkovalev.swipethenote.screens.AddScreen
+import ru.pvkovalev.swipethenote.screens.EditScreen
+import ru.pvkovalev.swipethenote.screens.MainScreen
 
 sealed class NavRoute(val route: String) {
     object Main : NavRoute("main_screen")
@@ -23,17 +23,17 @@ fun NavHost() {
         startDestination = NavRoute.Main.route
     ) {
         composable(NavRoute.Main.route) {
-            Main(
+            MainScreen(
                 navController = navController
             )
         }
         composable(NavRoute.Add.route) {
-            Add(
+            AddScreen(
                 navController = navController
             )
         }
         composable(NavRoute.Edit.route) {
-            Edit(
+            EditScreen(
                 navController = navController
             )
         }
