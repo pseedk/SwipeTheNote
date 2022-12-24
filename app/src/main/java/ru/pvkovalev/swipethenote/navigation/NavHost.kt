@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import ru.pvkovalev.swipethenote.MainViewModel
 import ru.pvkovalev.swipethenote.screens.AddScreen
 import ru.pvkovalev.swipethenote.screens.EditScreen
 import ru.pvkovalev.swipethenote.screens.MainScreen
@@ -15,7 +16,7 @@ sealed class NavRoute(val route: String) {
 }
 
 @Composable
-fun NavHost() {
+fun NavHost(mViewModel: MainViewModel) {
     val navController = rememberNavController()
 
     NavHost(
@@ -24,17 +25,20 @@ fun NavHost() {
     ) {
         composable(NavRoute.Main.route) {
             MainScreen(
-                navController = navController
+                navController = navController,
+                viewModel = mViewModel
             )
         }
         composable(NavRoute.Add.route) {
             AddScreen(
-                navController = navController
+                navController = navController,
+                viewModel = mViewModel,
             )
         }
         composable(NavRoute.Edit.route) {
             EditScreen(
-                navController = navController
+                navController = navController,
+                viewModel = mViewModel,
             )
         }
     }
