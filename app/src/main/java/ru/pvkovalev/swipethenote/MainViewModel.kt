@@ -6,25 +6,19 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ru.pvkovalev.swipethenote.database.AppRoomDatabase
+import ru.pvkovalev.swipethenote.database.repository.RoomRepository
 import ru.pvkovalev.swipethenote.model.Note
+import ru.pvkovalev.swipethenote.utils.REPOSITORY
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    val readTest: MutableLiveData<List<Note>> by lazy {
-        MutableLiveData<List<Note>>()
-    }
+  val context = application
 
-    init {
-        readTest.value = listOf(
-            Note(description = "Description1"),
-            Note(description = "Description2"),
-            Note(description = "Description3"),
-            Note(description = "Description4")
-        )
-    }
-
-    fun initDatabase() {
-        Log.d("checkData", "MainViewModel initDatabase")
+    fun initDatabase(onSuccess: () -> Unit) {
+        val dao = AppRoomDatabase.getInstance(context = context).getRoomDao()
+        REPOSITORY = RoomRepository(dao)
+        onSuccess()
     }
 }
 
