@@ -8,11 +8,15 @@ import ru.pvkovalev.swipethenote.MainViewModel
 import ru.pvkovalev.swipethenote.screens.AddScreen
 import ru.pvkovalev.swipethenote.screens.EditScreen
 import ru.pvkovalev.swipethenote.screens.MainScreen
+import ru.pvkovalev.swipethenote.utils.Constants.Keys.ID
+import ru.pvkovalev.swipethenote.utils.Constants.Screens.ADD_SCREEN
+import ru.pvkovalev.swipethenote.utils.Constants.Screens.EDIT_SCREEN
+import ru.pvkovalev.swipethenote.utils.Constants.Screens.MAIN_SCREEN
 
 sealed class NavRoute(val route: String) {
-    object Main : NavRoute("main_screen")
-    object Add : NavRoute("add_screen")
-    object Edit : NavRoute("edit_screen")
+    object Main : NavRoute(MAIN_SCREEN)
+    object Add : NavRoute(ADD_SCREEN)
+    object Edit : NavRoute(EDIT_SCREEN)
 }
 
 @Composable
@@ -35,10 +39,11 @@ fun NavHost(mViewModel: MainViewModel) {
                 viewModel = mViewModel,
             )
         }
-        composable(NavRoute.Edit.route) {
+        composable(NavRoute.Edit.route + "/{${ID}}") { backStackEntry ->
             EditScreen(
                 navController = navController,
                 viewModel = mViewModel,
+                noteId = backStackEntry.arguments?.getString(ID)
             )
         }
     }

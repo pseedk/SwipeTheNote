@@ -24,6 +24,9 @@ import ru.pvkovalev.swipethenote.MainViewModelFactory
 import ru.pvkovalev.swipethenote.model.Note
 import ru.pvkovalev.swipethenote.navigation.NavRoute
 import ru.pvkovalev.swipethenote.ui.theme.SwipeTheNoteTheme
+import ru.pvkovalev.swipethenote.utils.Constants.Keys.ADD_NEW_NOTE
+import ru.pvkovalev.swipethenote.utils.Constants.Keys.NOTE_DESCRIPTION
+import ru.pvkovalev.swipethenote.utils.Constants.Keys.SAVE_NOTE
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
@@ -37,7 +40,7 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "Add new note"
+                text = ADD_NEW_NOTE
             )
             OutlinedTextField(
                 value = description,
@@ -45,7 +48,7 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
                     description = it
                     isButtonEnabled = description.isNotEmpty()
                 },
-                label = { Text(text = "Note description") },
+                label = { Text(text = NOTE_DESCRIPTION) },
                 isError = description.isEmpty()
             )
             Button(
@@ -57,7 +60,7 @@ fun AddScreen(navController: NavHostController, viewModel: MainViewModel) {
                     }
                 }
             ) {
-                Text(text = "Save")
+                Text(text = SAVE_NOTE)
             }
         }
     }
